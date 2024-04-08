@@ -15,7 +15,7 @@ class Role(models.Model):
 
 
 class UserManager(BaseUserManager):
-    def create_user(self, email, first_name, last_name, role, date_of_birth, password=None):
+    def create_user(self, email, first_name, last_name, role, date_of_birth, password=None, password2=None):
         """
         Creates and saves a User with the given email, first name, last name, date of
         birth and password.
@@ -31,6 +31,8 @@ class UserManager(BaseUserManager):
         
         if not role :
             role, _ = Role.objects.get_or_create(name="Unassigned")
+        
+        print(password)
 
         user = self.model(
             email=self.normalize_email(email),
@@ -39,8 +41,8 @@ class UserManager(BaseUserManager):
             date_of_birth=date_of_birth,
             role=role,
         )
-
-        user.set_password(password)
+        if password:
+            user.set_password(password)
         user.save(using=self._db)
         return user
 
