@@ -4,8 +4,6 @@ from academy.serializers import HallSerializer, DepartmentSerializer
 from .models import Student
 
 
-
-
 class StudentSerializer(serializers.ModelSerializer):
     user = UserSerializer()
     hall = HallSerializer()

@@ -1,12 +1,17 @@
 from rest_framework import permissions
 
-class IsSystemAdminOrReadOnly(permissions.BasePermission):
+class IsSystemAdminOrCanModifyStudentProfile(permissions.BasePermission):
     def has_permission(self, request, view):
         if request.method in permissions.SAFE_METHODS:
             return True
+        if request.method == 'PATCH':
+            teacher = view.get_object()
+            return request.user.id == teacher.user.id
         return request.user.is_authenticated and request.user.role.name == "System Admin"
 
     def has_object_permission(self, request, view, obj):
         if request.method == 'DELETE':
             return request.user.role.name == "System Admin"
-        return request.user.is_authenticated
+        return request.user and request.user.is_authenticated
+
+
