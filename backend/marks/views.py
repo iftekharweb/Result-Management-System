@@ -2,7 +2,7 @@ from rest_framework import generics
 from rest_framework.viewsets import ReadOnlyModelViewSet
 from rest_framework.permissions import IsAuthenticated
 from .models import Mark
-from .serializers import MarkSerializer
+from .serializers import MarkSerializer, ReadOnlyMarkSerializer
 from .permissions import IsAssignedTeacherInSection
 
 
@@ -14,5 +14,5 @@ class MarkCreateAPIView(generics.CreateAPIView):
 
 class MarkViewSet(ReadOnlyModelViewSet):
     queryset = Mark.objects.all()
-    serializer_class = MarkSerializer
+    serializer_class = ReadOnlyMarkSerializer
     permission_classes = [IsAuthenticated]
