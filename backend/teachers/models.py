@@ -22,5 +22,8 @@ class Teacher(models.Model):
     university = models.CharField(max_length=255, default='University of Rajshahi')
     phone_number = models.CharField(max_length=255, null=True, blank=True)
 
+    def __str__(self) -> str:
+        return f'{self.user.first_name} {self.user.last_name}'
+
 
 
