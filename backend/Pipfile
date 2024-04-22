@@ -9,6 +9,8 @@ djangorestframework = "*"
 django-filter = "*"
 django-rest-framework-nested = "*"
 djangorestframework-simplejwt = "*"
+django-debug-toolbar = "*"
+django-cors-headers = "*"
 
 [dev-packages]
 
