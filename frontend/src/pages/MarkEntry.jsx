@@ -10,7 +10,7 @@ const MarkEntry = ({ year, section }) => {
       .get("http://127.0.0.1:8000/students/")
       .then((response) => {
         const filteredStudents = response.data.filter(
-          (student) => student.semester.year === year
+          (student) => student.semester.year === year && student.semester.name === "Odd"
         );
         const updatedStudents = filteredStudents.map((student) => ({
           ...student,
@@ -24,7 +24,6 @@ const MarkEntry = ({ year, section }) => {
   }, [year]);
 
   const handleMarksChange = (studentId, field, value) => {
-    console.log(value);
     const updatedStudents = students.map((student) => {
       if (student.id === studentId) {
         return {
@@ -35,28 +34,25 @@ const MarkEntry = ({ year, section }) => {
       return student;
     });
     setStudents(updatedStudents);
-    //console.log(students);
   };
 
   const addMarks = async (studentId, marks) => {
-    console.log(studentId);
-      console.log(section);
-      console.log(marks);
     try {
       const authToken = `Bearer ${localStorage.getItem("token")}`;
-
-      const response = await fetch("http://127.0.0.1:8000/marks/create/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: authToken,
-        },
-        body: JSON.stringify({
+      const response = await axios.post(
+        "http://127.0.0.1:8000/marks/create/",
+        {
           section: section,
           student: studentId,
           ...marks,
-        }),
-      });
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: authToken,
+          },
+        }
+      );
 
       setMarksAdded(true);
       console.log("Marks added successfully:", response.data);
@@ -87,7 +83,7 @@ const MarkEntry = ({ year, section }) => {
         <tbody>
           {students.map(
             (student) =>
-              student.posted == false && (
+              student.posted === false && (
                 <tr key={student.id}>
                   <td>{student.SID}</td>
                   <td>{student.user.first_name}</td>

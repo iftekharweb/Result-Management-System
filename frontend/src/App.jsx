@@ -15,7 +15,7 @@ function App() {
                 <Route path='/*' element={<Profile/>} />
                 <Route path='/students' element={<Students/>} />
                 <Route path='/teachers' element={<Teachers/>} />
-                <Route path='/marks' element={<MarkEntry year={1} section={1}/>} />
+                <Route path='/marks' element={<MarkEntry year={1} semester={`Odd`} section={6}/>} />
             </Routes>
         </BrowserRouter>
     )
