@@ -4,6 +4,7 @@ import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import Profile from './pages/Profile';
 import Students from './pages/Students';
 import Teachers from './pages/Teachers';
+import MarkEntry from './pages/MarkEntry';
 
 function App() {
     const [redirectToProfile, setRedirectToProfile] = useState(false);
@@ -14,6 +15,7 @@ function App() {
                 <Route path='/*' element={<Profile/>} />
                 <Route path='/students' element={<Students/>} />
                 <Route path='/teachers' element={<Teachers/>} />
+                <Route path='/marks' element={<MarkEntry year={1} section={1}/>} />
             </Routes>
         </BrowserRouter>
     )
