@@ -5,6 +5,7 @@ import Profile from './pages/Profile';
 import Students from './pages/Students';
 import Teachers from './pages/Teachers';
 import MarkEntry from './pages/MarkEntry';
+import Create from './pages/Create';
 
 function App() {
     const [redirectToProfile, setRedirectToProfile] = useState(false);
@@ -15,6 +16,7 @@ function App() {
                 <Route path='/*' element={<Profile/>} />
                 <Route path='/students' element={<Students/>} />
                 <Route path='/teachers' element={<Teachers/>} />
+                <Route path='/create' element={<Create/>} />
                 <Route path='/marks' element={<MarkEntry year={1} semester={`Odd`} section={6}/>} />
             </Routes>
         </BrowserRouter>
