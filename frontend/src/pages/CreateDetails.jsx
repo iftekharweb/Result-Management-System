@@ -102,7 +102,7 @@ const CreateDetails = ({email}) => {
 
       if (response.status === 201) {
         alert("Student details added successfully.");
-        navigate('/create')
+        navigate('/profile')
       } else {
         const errorData = response.data;
         alert(errorData.detail || "An error occurred.");
@@ -116,6 +116,7 @@ const CreateDetails = ({email}) => {
   return (
     <div className="w-full flex flex-col justify-center items-center p-20">
       <h2 className="font-semibold text-3xl mt-4 mb-1">Add Student Details</h2>
+      <h1 className="text-sm">User: {email}</h1>
       <form onSubmit={handleSubmit} className="w-full flex flex-col">
         <select
           className="w-full text-black py-2 my-1 bg-transparent border-b-2 outline-none focus:outline-none focus:border-black"
