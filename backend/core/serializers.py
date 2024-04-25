@@ -150,4 +150,14 @@ class UserPasswordResetSerializer(serializers.ModelSerializer):
         except DjangoUnicodeDecodeError as identifier:
             PasswordResetTokenGenerator(user, token)
             raise serializers.ValidationError('Token Is Not Valid Or Expired!!') 
+        
+
+class UserIdSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+    def validate_email(self, value):
+        if not User.objects.filter(email=value).exists():
+            raise serializers.ValidationError("User does not exist with this email.")
+        return value
+
+
             

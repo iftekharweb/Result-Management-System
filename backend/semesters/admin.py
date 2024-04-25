@@ -8,7 +8,7 @@ class YearAdmin(admin.ModelAdmin):
 
 @admin.register(Semester)
 class SemesterAdmin(admin.ModelAdmin):
-    list_display = ('year', 'name')
+    list_display = ('id','year', 'name')
     list_filter = ('year', 'name')
     search_fields = ('year__year', 'name')
     ordering = ('year', 'name')

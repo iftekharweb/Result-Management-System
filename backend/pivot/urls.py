@@ -9,5 +9,7 @@ urlpatterns = [
     path('', include('teachers.urls')),
     path('', include('courses.urls')),
     path('', include('marks.urls')),
+    path('', include('academy.urls')),
+    path('', include('semesters.urls')),
     path("__debug__/", include("debug_toolbar.urls")),
 ]

@@ -3,8 +3,11 @@ from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated, AllowAny, IsAdminUser
 from django.contrib.auth import authenticate
+from rest_framework.decorators import api_view
 from . import serializers
 from . import renderers
+from .models import User
+from .serializers import UserIdSerializer
 
 # M A N U A L L Y   G E N E R A T E   T O K E N
 from rest_framework_simplejwt.tokens import RefreshToken
@@ -118,5 +121,18 @@ class UserPasswordResetView(APIView):
             }, 
             status=status.HTTP_200_OK
         )
+
     
-        
+
+@api_view(['GET'])
+def get_user_id_by_email(request):
+    email = request.GET.get('email', None)
+    
+    if not email:
+        return Response({'error': 'Email parameter is required'}, status=400)
+
+    try:
+        user = User.objects.get(email=email)
+        return Response({'user_id': user.id})
+    except User.DoesNotExist:
+        return Response({'error': 'User not found'}, status=404)

@@ -5,4 +5,4 @@ from .models import Semester
 class SemesterSerializer(serializers.ModelSerializer):
     class Meta:
         model = Semester
-        fields = ['year', 'name']
+        fields = ['id' , 'year', 'name']
