@@ -13,4 +13,17 @@ class StudentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Student
-        fields = ['id','user', 'hall', 'department', 'semester', 'SID', 'hsc_reg', 'blood_group', 'university', 'phone_number', 'session']
+        fields = ['id','user', 'hall', 'department', 'semester', 'SID', 'hsc_reg', 'blood_group', 'university', 'phone_number', 'session'] 
+
+
+class StudentCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Student
+        fields = [
+            'user', 'hall', 'department', 'semester', 
+            'SID', 'hsc_reg', 'blood_group', 'university', 
+            'phone_number', 'session'
+        ]
+
+    def create(self, validated_data):
+        return Student.objects.create(**validated_data)

@@ -31,7 +31,6 @@ class UserRegistrationView(APIView):
         token = get_tokens_for_user(user)
         return Response(
             {
-                'token':token,
                 'msg':'Registration Successful !'
             }, 
             status=status.HTTP_201_CREATED
