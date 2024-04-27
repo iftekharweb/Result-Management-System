@@ -168,9 +168,9 @@ const CreateDetails = ({ email, role }) => {
 
   return (
     <div className="w-full flex flex-col justify-center items-center p-20">
-      <h2 className="font-semibold text-3xl mt-4 mb-1">Add {role} Details</h2>
+      <h2 className="font-semibold text-3xl mt-4 mb-1">Add {role === 2 ? "Teacher" : "Student"} Details</h2>
       <h1 className="text-sm">User: {email}</h1>
-      {role === "Student" ? (
+      {role === 3 ? (
         <form onSubmit={handleSubmit} className="w-full flex flex-col">
           <select
             className="w-full text-black py-2 my-1 bg-transparent border-b-2 outline-none focus:outline-none focus:border-black"

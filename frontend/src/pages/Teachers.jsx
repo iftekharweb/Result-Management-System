@@ -3,6 +3,9 @@ import axios from "axios";
 
 const Teachers = () => {
   const [teachers, setTeachers] = useState([]) 
+  const [filter, setFilter] = useState('All');
+  const [searchTID, setSearchTID] = useState('');
+
   useEffect(() => {
     const GetTeachers = async () => {
       try {
@@ -12,7 +15,6 @@ const Teachers = () => {
           },
         });
         const data = response.data;
-        console.log(data);
         setTeachers(() => data);
       } catch (error) {
         console.log(error.message);
@@ -20,24 +22,42 @@ const Teachers = () => {
     }
     GetTeachers();
   }, [])
-  const [filter, setFilter] = useState('All');
 
   const filteredTeachers = filter === 'All'
     ? teachers
-    : teachers.filter(teacher =>teacher.semester.year === parseInt(filter));
+    : teachers.filter(teacher => teacher.semester.year === parseInt(filter));
+
+  const filteredByTID = searchTID
+    ? filteredTeachers.filter(teacher => teacher.TID.toString().includes(searchTID))
+    : filteredTeachers;
 
   return (
-    <div>
-      <h1>Teachers</h1>
-
-      <ul>
-        {filteredTeachers.map(teachteacher => (
-          <li key={teachteacher.id}>
-            <h2>{`${teachteacher.user.first_name} ${teachteacher.user.last_name}`}</h2>
-            <p>Email: {teachteacher.user.email}</p>
-            <p>Department: {teachteacher.department.name}</p>
-            <p>TID: {teachteacher.TID}</p>
-            <p>Phone Number: {teachteacher.phone_number}</p>
+    <div className="container mx-auto px-4 py-3">
+      <div className="w-full flex flex-row justify-between">
+        <h1 className="text-black text-3xl mb-4">Teachers</h1>
+        <div className="flex justify-center mb-4">
+          <input
+            type="text"
+            placeholder="Search by id"
+            value={searchTID}
+            onChange={(e) => setSearchTID(e.target.value)}
+            className="p-2 bg-gray-200 text-gray-800 rounded"
+          />
+        </div>
+      </div>
+      <ul className="flex flex-col justify-start items-center w-full">
+        <li className='flex flex-row justify-around items-center w-full rounded-md bg-[#060606] p-3 font-bold text-white mb-1'>
+          <p className='w-1/5 flex justify-center items-center'>Teacher id</p>
+          <p className='w-1/4 flex justify-center items-center'>Full Name</p>
+          <p className='w-1/4 flex justify-center items-center'>Email</p>
+          <p className='w-1/4 flex justify-center items-center'>Department</p>
+        </li>
+        {filteredByTID.map(teacher => (
+          <li key={teacher.id} className='flex flex-row justify-evenly items-center w-full rounded-md bg-gray-200 p-3 m-2'>
+            <p className="text-[#060606] w-1/5 flex justify-center items-center">{teacher.TID}</p>
+            <h2 className="text-[#060606] w-1/4 flex justify-center items-center">{`${teacher.user.first_name} ${teacher.user.last_name}`}</h2>
+            <p className="text-[#060606] w-1/4 flex justify-center items-center">{teacher.user.email}</p>
+            <p className="text-[#060606] w-1/4 flex justify-center items-center">{teacher.department.name}</p>
           </li>
         ))}
       </ul>
