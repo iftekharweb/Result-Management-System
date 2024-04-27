@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import axios from "axios";
+import { useNavigate } from 'react-router-dom';
 
 const Teachers = () => {
   const [teachers, setTeachers] = useState([]) 
   const [filter, setFilter] = useState('All');
   const [searchTID, setSearchTID] = useState('');
+
+  const navigate = useNavigate();
 
   const decodeToken = (token) => {
     const base64Url = token.split(".")[1];
@@ -30,7 +33,7 @@ const Teachers = () => {
       navigate("/auth/login");
       return;
     }
-    
+
     const GetTeachers = async () => {
       try {
         const response = await axios.get("http://127.0.0.1:8000/teachers/", {

@@ -1,9 +1,40 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-const MarkEntry = ({ year, section }) => {
+const MarkEntry = () => {
   const [students, setStudents] = useState([]);
   const [marksAdded, setMarksAdded] = useState(false);
+  const [uid, setUid] = useState(null);
+
+  const navigate = useNavigate();
+
+  const decodeToken = (token) => {
+    const base64Url = token.split(".")[1];
+    const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+    const jsonPayload = decodeURIComponent(
+      atob(base64)
+        .split("")
+        .map((char) => "%" + ("00" + char.charCodeAt(0).toString(16)).slice(-2))
+        .join("")
+    );
+    return JSON.parse(jsonPayload);
+  };
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      const user = decodeToken(token);
+      if (user) {
+        setUid(user.user_id);
+        navigate("/auth/login");
+      }
+    } else {
+      navigate("/auth/login");
+    }
+  }, []);
+
+  // Pending
 
   useEffect(() => {
     axios

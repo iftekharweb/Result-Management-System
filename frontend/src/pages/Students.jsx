@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import axios from "axios";
+import { useNavigate } from 'react-router-dom';
 
 const Students = () => {
   const [students, setStudents] = useState([]) 
   const [filter, setFilter] = useState('All');
   const [searchSID, setSearchSID] = useState('');
+
+  const navigate = useNavigate()
 
   const decodeToken = (token) => {
     const base64Url = token.split(".")[1];

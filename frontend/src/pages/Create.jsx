@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import CreateDetails from "./CreateDetails";
+import { useNavigate } from "react-router-dom";
 
 const Create = () => {
   const [email, setEmail] = useState("");
@@ -12,6 +13,8 @@ const Create = () => {
   const [password2, setPassword2] = useState("");
 
   const [change, setChange] = useState(false);
+
+  const navigate = useNavigate();
   
   const decodeToken = (token) => {
     const base64Url = token.split(".")[1];
