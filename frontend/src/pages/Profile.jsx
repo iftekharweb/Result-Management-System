@@ -249,7 +249,7 @@ const Profile = () => {
       )}
       {details && rolename === "Teacher" && (
         <>
-          <div className="w-full flex flex-row justify-start items-start px-14">
+          <div className="w-full flex flex-row justify-start items-start px-20">
             <div>
               <p className="mb-2">
                 <span className="font-semibold">Teacher ID </span>
@@ -283,26 +283,14 @@ const Profile = () => {
               <p className="mb-2">
                 <span className="font-semibold"> : </span>
               </p>
-              <p className="mb-2">
-                <span className="font-semibold"> : </span>
-              </p>
-              <p className="mb-2">
-                <span className="font-semibold"> : </span>
-              </p>
-              <p className="mb-2">
-                <span className="font-semibold"> : </span>
-              </p>
             </div>
 
             <div className="pl-1">
-              <p className="mb-2">{details.SID}</p>
+              <p className="mb-2">{details.TID}</p>
               <p className="mb-2">{details.department.name}</p>
-              <p className="mb-2">{details.hall.name}</p>
               <p className="mb-2">{details.university}</p>
-              <p className="mb-2">{details.hsc_reg}</p>
-              <p className="mb-2">{details.session}</p>
-              <p className="mb-2">{details.semester.year}</p>
-              <p className="mb-2">{details.semester.name}</p>
+              <p className="mb-2">{details.blood_group}</p>
+              <p className="mb-2">{details.phone_number}</p>
             </div>
           </div>
         </>
