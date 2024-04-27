@@ -12,6 +12,30 @@ const Create = () => {
   const [password2, setPassword2] = useState("");
 
   const [change, setChange] = useState(false);
+  
+  const decodeToken = (token) => {
+    const base64Url = token.split(".")[1];
+    const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+    const jsonPayload = decodeURIComponent(
+      atob(base64)
+        .split("")
+        .map((char) => "%" + ("00" + char.charCodeAt(0).toString(16)).slice(-2))
+        .join("")
+    );
+    return JSON.parse(jsonPayload);
+  };
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      const user = decodeToken(token);
+      if (user) {
+        navigate("/auth/login");
+      }
+    } else {
+      navigate("/auth/login");
+    }
+  }, []);
 
 
   const handleSubmit = async (e) => {

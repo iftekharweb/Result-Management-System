@@ -6,7 +6,30 @@ const Students = () => {
   const [filter, setFilter] = useState('All');
   const [searchSID, setSearchSID] = useState('');
 
+  const decodeToken = (token) => {
+    const base64Url = token.split(".")[1];
+    const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+    const jsonPayload = decodeURIComponent(
+      atob(base64)
+        .split("")
+        .map((char) => "%" + ("00" + char.charCodeAt(0).toString(16)).slice(-2))
+        .join("")
+    );
+    return JSON.parse(jsonPayload);
+  };
+
   useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      const user = decodeToken(token);
+      if (!user) {
+        navigate("/auth/login");
+        return;
+      }
+    } else {
+      navigate("/auth/login");
+      return;
+    }
     const GetStudents = async () => {
       try {
         const response = await axios.get("http://127.0.0.1:8000/students/", {

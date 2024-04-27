@@ -33,7 +33,7 @@ class Section(models.Model):
         ("B", "B")
     ]
     section = models.CharField(max_length=255, choices=SECTION_CHOICE)
-    teacher = models.OneToOneField(Teacher, on_delete=models.PROTECT)
+    teacher = models.ForeignKey(Teacher, on_delete=models.PROTECT)
 
     def __str__(self) -> str:
         if self.section == "LAB":
