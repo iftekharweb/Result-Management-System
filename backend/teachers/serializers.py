@@ -27,3 +27,16 @@ class TeacherWithAssignedCourseSerializer(serializers.ModelSerializer):
         sections = Section.objects.filter(teacher=obj)
         serializer = SectionSerializer(sections, many=True)
         return serializer.data
+    
+
+class TeacherCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Teacher
+        fields = [
+            'user', 'department', 
+            'TID', 'blood_group', 'university', 
+            'phone_number',
+        ]
+
+    def create(self, validated_data):
+        return Teacher.objects.create(**validated_data)

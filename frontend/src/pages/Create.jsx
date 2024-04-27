@@ -149,6 +149,7 @@ const Create = () => {
         <>
           <CreateDetails
             email={email}
+            role={role}
           />
         </>
       )}

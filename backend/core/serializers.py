@@ -4,6 +4,8 @@ from django.contrib.auth.hashers import check_password
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from rest_framework import serializers
 from .models import User
+from students.models import Student
+from teachers.models import Teacher
 from django.core.mail import send_mail
 import os
 
@@ -48,9 +50,20 @@ class UseLogInSerializer(serializers.ModelSerializer):
 
 
 class UserProfileSerializer(serializers.ModelSerializer):
+    related_id = serializers.SerializerMethodField()
+
+    def get_related_id(self, obj):
+        student = Student.objects.filter(user=obj).first()
+        if student:
+            return student.id
+        teacher = Teacher.objects.filter(user=obj).first()
+        if teacher:
+            return teacher.id
+        return None
+    
     class Meta:
         model = User
-        fields = ['id', 'email', 'role' ,'first_name', 'last_name']
+        fields = ['id', 'email', 'role' ,'first_name', 'last_name', 'related_id']
         read_only_fields = ['id']
 
 
@@ -158,6 +171,11 @@ class UserIdSerializer(serializers.Serializer):
         if not User.objects.filter(email=value).exists():
             raise serializers.ValidationError("User does not exist with this email.")
         return value
+    
+class StudentTeacherIdSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = None
+        fields = ['id']
 
 
             

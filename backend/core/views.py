@@ -7,7 +7,11 @@ from rest_framework.decorators import api_view
 from . import serializers
 from . import renderers
 from .models import User
-from .serializers import UserIdSerializer
+from rest_framework.generics import RetrieveAPIView
+from students.models import Student
+from teachers.models import Teacher
+from .serializers import StudentTeacherIdSerializer
+from django.shortcuts import get_object_or_404
 
 # M A N U A L L Y   G E N E R A T E   T O K E N
 from rest_framework_simplejwt.tokens import RefreshToken
@@ -135,3 +139,24 @@ def get_user_id_by_email(request):
         return Response({'user_id': user.id})
     except User.DoesNotExist:
         return Response({'error': 'User not found'}, status=404)
+    
+
+
+class StudentTeacherIdView(RetrieveAPIView):
+    serializer_class = StudentTeacherIdSerializer
+    renderer_classes = [renderers.UserRenderer]
+    permission_classes = [IsAuthenticated]
+
+    def get_object(self):
+        user_id = self.kwargs.get('user_id')
+        
+        student = get_object_or_404(Student, user_id=user_id)
+        if student:
+            self.serializer_class.Meta.model = Student
+            return student
+
+        teacher = get_object_or_404(Teacher, user_id=user_id)
+        if teacher:
+            self.serializer_class.Meta.model = Teacher
+            return teacher
+
