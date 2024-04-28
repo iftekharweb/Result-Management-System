@@ -149,14 +149,14 @@ class StudentTeacherIdView(RetrieveAPIView):
 
     def get_object(self):
         user_id = self.kwargs.get('user_id')
-        
-        student = get_object_or_404(Student, user_id=user_id)
-        if student:
-            self.serializer_class.Meta.model = Student
-            return student
 
         teacher = get_object_or_404(Teacher, user_id=user_id)
         if teacher:
             self.serializer_class.Meta.model = Teacher
             return teacher
+        
+        student = get_object_or_404(Student, user_id=user_id)
+        if student:
+            self.serializer_class.Meta.model = Student
+            return student
 
