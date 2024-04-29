@@ -32,7 +32,7 @@ const Create = () => {
     const token = localStorage.getItem("token");
     if (token) {
       const user = decodeToken(token);
-      if (user) {
+      if (!user) {
         navigate("/auth/login");
       }
     } else {
