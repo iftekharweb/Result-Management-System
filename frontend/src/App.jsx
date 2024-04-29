@@ -7,6 +7,7 @@ import Teachers from './pages/Teachers';
 import MarkEntry from './pages/MarkEntry';
 import Create from './pages/Create';
 import AssignedSections from './pages/AssignedSections';
+import Home from './pages/Home';
 
 function App() {
     const [redirectToProfile, setRedirectToProfile] = useState(false);
@@ -14,6 +15,7 @@ function App() {
         <BrowserRouter>
             <Routes>
                 <Route path='/auth/login' element={<Login/>}></Route>
+                <Route path='/home' element={<Home/>}></Route>
                 <Route path='/*' element={<Profile/>} />
                 <Route path='/students' element={<Students/>} />
                 <Route path='/teachers' element={<Teachers/>} />

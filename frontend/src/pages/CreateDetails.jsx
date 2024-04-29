@@ -167,7 +167,7 @@ const CreateDetails = ({ email, role }) => {
   };
 
   return (
-    <div className="w-full flex flex-col justify-center items-center p-20">
+    <div className="w-full flex flex-col justify-center items-center px-20 py-2">
       <h2 className="font-semibold text-3xl mt-4 mb-1">Add {role === 2 ? "Teacher" : "Student"} Details</h2>
       <h1 className="text-sm">User: {email}</h1>
       {role === 3 ? (

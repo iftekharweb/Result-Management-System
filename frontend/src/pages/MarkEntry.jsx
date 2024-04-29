@@ -242,10 +242,10 @@ const MarkEntry = ({ semester, year, section, handleState }) => {
         </div>
       </div>
 
-      <div className="w-full">
+      <div className="w-full flex justify-center items-center mt-5">
         <button
           onClick={handleState}
-          className="bg-gray-400 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded"
+          className="bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-10 rounded"
         >
           Back
         </button>

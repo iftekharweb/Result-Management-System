@@ -87,7 +87,7 @@ const Create = () => {
   return (
     <div>
       {!change ? (
-        <div className="w-full flex flex-col justify-center items-center p-20">
+        <div className="w-full flex flex-col justify-center items-center px-40 py-5">
           <h2 className="font-semibold text-3xl mt-4 mb-1">
             Create A New User
           </h2>

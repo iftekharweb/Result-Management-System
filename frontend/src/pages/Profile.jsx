@@ -295,15 +295,6 @@ const Profile = () => {
           </div>
         </>
       )}
-
-      <div className="w-full flex flex-row justify-center items-center p-3">
-        <button
-          className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-          onClick={handleClick}
-        >
-          Log Out
-        </button>
-      </div>
     </div>
   );
 };
