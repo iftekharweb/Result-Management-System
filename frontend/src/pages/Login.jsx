@@ -25,7 +25,7 @@ const Login = () => {
     if (token) {
       const user = decodeToken(token);
       if (user) {
-        navigate("/profile");
+        navigate("/");
       }
     }
   }, []);
@@ -43,7 +43,7 @@ const Login = () => {
       const data = await response.json();
       if (!data.errors) {
         localStorage.setItem("token", data.token.access);
-        navigate("/profile");
+        navigate("/");
       }
     } catch (error) {
       console.log(error.message);
