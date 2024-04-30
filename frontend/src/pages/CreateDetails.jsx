@@ -15,7 +15,7 @@ const CreateDetails = ({ email, role }) => {
   const [SID, setSID] = useState(null);
   const [TID, setTID] = useState(null);
   const [hsc_reg, setHsc_reg] = useState(null);
-  const [bloodGroup, setBloodGroup] = useState("");
+  const [bloodGroup, setBloodGroup] = useState("A+");
   const [phone, setPhone] = useState("");
   const [session, setSession] = useState("");
   const [user_id, setUserId] = useState(null);
@@ -220,7 +220,7 @@ const CreateDetails = ({ email, role }) => {
           <input
             className="w-full text-black py-2 my-1 bg-transparent border-b-2 outline-none focus:outline-none focus:border-black"
             type="number"
-            placeholder="SID"
+            placeholder="Student ID"
             value={SID}
             onChange={(e) => setSID(e.target.value)}
             required
@@ -298,7 +298,7 @@ const CreateDetails = ({ email, role }) => {
           <input
             className="w-full text-black py-2 my-1 bg-transparent border-b-2 outline-none focus:outline-none focus:border-black"
             type="number"
-            placeholder="SID"
+            placeholder="Teacher ID"
             value={SID}
             onChange={(e) => setTID(e.target.value)}
             required
