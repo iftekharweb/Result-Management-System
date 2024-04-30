@@ -11,6 +11,8 @@ const AssignedSections = () => {
   const [section, setSection] = useState(null);
   const [year, setYear] = useState(null);
   const [semester, setSemester] = useState("");
+  const [sectionName, setSectionName] = useState("")
+  const [courseName, setCourseName] = useState("")
 
   const navigate = useNavigate();
 
@@ -73,7 +75,7 @@ const AssignedSections = () => {
         setSection(data.id);
       } else {
         alert("Something is Wrong!");
-        navigate("/profile");
+        navigate("/");
       }
     } catch (error) {
       console.error(error);
@@ -86,11 +88,13 @@ const AssignedSections = () => {
     }
   }, [uid]);
 
-  const handleAddMarks = (id, _year, _semester) => {
+  const handleAddMarks = (id, _year, _semester, _sectionName, _courseName) => {
     setYear(_year);
     setSemester(_semester);
     setSection(id);
     setAddingMark(true);
+    setSectionName(_sectionName);
+    setCourseName(_courseName);
   };
 
   const handleState = () => {
@@ -122,13 +126,16 @@ const AssignedSections = () => {
                         <br />
                         <span className="font-semibold">Credit : </span>{" "}
                         {course.course.credit}
+                        <br />
+                        <span className="font-semibold">Section : </span>{" "}
+                        {course.section}
                       </p>
                     </div>
                   </div>
                   <div className="w-1/4 flex justify-end items-center">
                     <button
                       className="bg-[#060606] text-white font-semibold p-4 rounded-md hover:bg-sky-700"
-                      onClick={() => handleAddMarks(course.id, course.course.semester.year, course.course.semester.name)}
+                      onClick={() => handleAddMarks(course.id, course.course.semester.year, course.course.semester.name, course.section, course.course.code)}
                     >
                       Add Marks
                     </button>
@@ -146,6 +153,8 @@ const AssignedSections = () => {
               semester={semester}
               year={year}
               handleState={handleState}
+              sectionName={sectionName}
+              courseName={courseName}
             />
           </div>
         </>

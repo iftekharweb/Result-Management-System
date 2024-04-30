@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const MarkEntry = ({ semester, year, section, handleState }) => {
+const MarkEntry = ({ semester, year, section, handleState, sectionName, courseName }) => {
   const [students, setStudents] = useState([]);
 
   const navigate = useNavigate();
@@ -30,10 +30,10 @@ const MarkEntry = ({ semester, year, section, handleState }) => {
   }, [section]);
 
 
-  const [fullExamMark, setFullExamMark] = useState(0.0);
-  const [presentationMark, setPresentationMark] = useState(0.0);
-  const [ctMark, setCtMark] = useState(0.0);
-  const [attendanceMark, setAttendanceMark] = useState(0.0);
+  const [fullExamMark, setFullExamMark] = useState(null);
+  const [presentationMark, setPresentationMark] = useState(null);
+  const [ctMark, setCtMark] = useState(null);
+  const [attendanceMark, setAttendanceMark] = useState(null);
 
   const [currUid, setCurrUid] = useState(null);
   const [currSID, setCurrSID] = useState(null);
@@ -111,8 +111,9 @@ const MarkEntry = ({ semester, year, section, handleState }) => {
 
   return (
     <div className="w-full flex flex-col">
-      <div className="w-full flex justify-center items-center p-4">
+      <div className="w-full flex flex-col justify-center items-center p-4">
         <h1 className="text-2xl font-semibold">Marks Entry</h1>
+        <p>ICE {courseName} | Section {sectionName}</p>
       </div>
 
       <div className="w-full flex flex-row ">
