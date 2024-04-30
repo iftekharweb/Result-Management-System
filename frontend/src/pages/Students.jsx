@@ -89,8 +89,8 @@ const Students = () => {
         </li>
         {filteredBySID.map(student => (
           <li key={student.id} className='flex flex-row justify-evenly items-center w-full rounded-md bg-gray-200 p-3 m-2'>
-            <h2 className="text-[#060606] w-1/4 flex justify-center items-center">{`${student.user.first_name} ${student.user.last_name}`}</h2>
             <p className="text-[#060606] w-1/4 flex justify-center items-center">{student.SID}</p>
+            <h2 className="text-[#060606] w-1/4 flex justify-center items-center">{`${student.user.first_name} ${student.user.last_name}`}</h2>
             <p className="text-[#060606] w-1/4 flex justify-center items-center">{student.user.email}</p>
             <p className="text-[#060606] w-1/4 flex justify-center items-center">{student.session}</p>
           </li>

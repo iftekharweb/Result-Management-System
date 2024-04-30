@@ -73,6 +73,7 @@ const Results = () => {
       };
     });
     setTotalMarksArray(summedMarksArray);
+    console.log(summedMarksArray);
   }, [marksArray]);
 
   return (
